@@ -31,8 +31,8 @@ export default function SearchUsers() {
   const searchUsers = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:5000/api/users/search?query=${query}`, {
-        headers: { Authorization: `Bearer ${token}` }
+      const response = await axios.get(${import.meta.env.VITE_API_URI}/api/users/search?query=${query}, {
+        headers: { Authorization: Bearer ${token} }
       });
       setUsers(response.data);
     } catch (error) {
@@ -45,9 +45,9 @@ export default function SearchUsers() {
   const sendFriendRequest = async (userId: string) => {
     try {
       await axios.post(
-        'http://localhost:5000/api/friends/request',
+        ${import.meta.env.VITE_API_URI}/api/friends/request,
         { friendId: userId },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: Bearer ${token} } }
       );
       toast.success('Friend request sent!');
     } catch (error) {
