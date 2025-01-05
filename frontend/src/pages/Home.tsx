@@ -30,8 +30,8 @@ export default function Home() {
 
   const fetchFriends = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/users/profile/${user?.id}`, {
-        headers: { Authorization: `Bearer ${token}` }
+      const response = await axios.get(${import.meta.env.VITE_API_URI}/api/users/profile/${user?.id}, {
+        headers: { Authorization: Bearer ${token} }
       });
       setFriends(response.data.friends);
     } catch (error) {
@@ -41,8 +41,8 @@ export default function Home() {
 
   const fetchRecommendations = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/friends/recommendations', {
-        headers: { Authorization: `Bearer ${token}` }
+      const response = await axios.get(${import.meta.env.VITE_API_URI}/api/friends/recommendations, {
+        headers: { Authorization: Bearer ${token} }
       });
       setRecommendations(response.data);
     } catch (error) {
@@ -59,8 +59,8 @@ export default function Home() {
     }
 
     try {
-      const response = await axios.get(`http://localhost:5000/api/users/search?query=${query}`, {
-        headers: { Authorization: `Bearer ${token}` }
+      const response = await axios.get(${import.meta.env.VITE_API_URI}/api/users/search?query=${query}, {
+        headers: { Authorization: Bearer ${token} }
       });
       setSearchResults(response.data);
     } catch (error) {
@@ -71,9 +71,9 @@ export default function Home() {
   const handleSendRequest = async (friendId: string) => {
     try {
       await axios.post(
-        'http://localhost:5000/api/friends/request',
+        ${import.meta.env.VITE_API_URI}/api/friends/request,
         { friendId },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: Bearer ${token} } }
       );
       toast.success('Friend request sent!');
       fetchRecommendations();
@@ -85,8 +85,8 @@ export default function Home() {
   const handleRemoveFriend = async (friendId: string) => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/friends/${friendId}`,
-        { headers: { Authorization: `Bearer ${token}` } }
+        ${import.meta.env.VITE_API_URI}/api/friends/${friendId},
+        { headers: { Authorization: Bearer ${token} } }
       );
       toast.success('Friend removed');
       fetchFriends();
