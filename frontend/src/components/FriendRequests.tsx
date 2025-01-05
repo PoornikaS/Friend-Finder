@@ -27,8 +27,8 @@ export default function FriendRequests() {
 
   const fetchRequests = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/friends/requests', {
-        headers: { Authorization: `Bearer ${token}` }
+      const response = await axios.get(${import.meta.env.VITE_API_URI}/api/friends/requests, {
+        headers: { Authorization: Bearer ${token} }
       });
       setRequests(response.data);
     } catch (error) {
@@ -41,11 +41,11 @@ export default function FriendRequests() {
   const handleRequest = async (requestId: string, action: 'accept' | 'reject') => {
     try {
       await axios.post(
-        'http://localhost:5000/api/friends/handle-request',
+        ${import.meta.env.VITE_API_URI}/api/friends/handle-request,
         { requestId, action },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: Bearer ${token} } }
       );
-      toast.success(`Friend request ${action}ed`);
+      toast.success(Friend request ${action}ed);
       fetchRequests();
     } catch (error) {
       toast.error('Failed to handle request');
